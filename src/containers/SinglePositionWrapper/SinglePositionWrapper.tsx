@@ -190,9 +190,14 @@ export const SinglePositionWrapper: React.FC<IProps> = ({ id }) => {
         feeGrowthGlobalY: position.poolData.feeGrowthGlobalY
       })
 
-      return [
+      const [intX, intY] = [
         +printBN(bnX.div(DENOMINATOR).div(DENOMINATOR), position.tokenX.decimals),
         +printBN(bnY.div(DENOMINATOR).div(DENOMINATOR), position.tokenY.decimals)
+      ]
+
+      return [
+        intX < 10 ** (-position.tokenX.decimals) ? 0 : intX,
+        intY < 10 ** (-position.tokenY.decimals) ? 0 : intY
       ]
     }
 
